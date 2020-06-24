@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Metronome X</string>
+    <string name="input">Input</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="notification_title">Metronome X</string>
+</resources>
