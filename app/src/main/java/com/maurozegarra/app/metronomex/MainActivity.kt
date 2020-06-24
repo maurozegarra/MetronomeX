@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 
-const val KEY_INPUT = "key_input"
-
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val KEY_INPUT = "key_input"
+    }
+
     private lateinit var editTextInput: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {

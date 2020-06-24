@@ -6,6 +6,11 @@ import android.app.NotificationManager
 import android.os.Build
 
 class App : Application() {
+
+    companion object {
+        const val CHANNEL_ID = "metronomeServiceChannel"
+    }
+
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
@@ -23,9 +28,5 @@ class App : Application() {
             )
             manager.createNotificationChannel(serviceChannel)
         }
-    }
-
-    companion object {
-        const val CHANNEL_ID = "metronomeServiceChannel"
     }
 }

@@ -8,14 +8,18 @@ import android.media.SoundPool
 import android.os.Handler
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-
-// This is the number of milliseconds in a minute
-const val ONE_MINUTE = 60_000L
-
-// This is the number of beats per minute
-const val BPM = 100
+import com.maurozegarra.app.metronomex.MainActivity.Companion.KEY_INPUT
 
 class MetronomeService : Service() {
+
+    companion object {
+        // This is the number of milliseconds in a minute
+        const val ONE_MINUTE = 60_000L
+
+        // This is the number of beats per minute
+        const val BPM = 100
+    }
+
     private var handler = Handler()
     private lateinit var runnable: Runnable
 
