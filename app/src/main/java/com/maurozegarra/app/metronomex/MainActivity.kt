@@ -29,22 +29,25 @@ class MainActivity : AppCompatActivity() {
         // toggle previous state
         eventPlay = !eventPlay
 
-        if (eventPlay) startService() else pauseService()
+        if (eventPlay)
+            startService()
+        else
+            pauseService()
     }
 
     private fun startService() {
         val input = editTextInput.text.toString()
 
-        val serviceIntent = Intent(this, MetronomeService::class.java)
-        serviceIntent.putExtra(KEY_INPUT, input)
+        val beatIntent = Intent(this, MetronomeService::class.java)
+        beatIntent.putExtra(KEY_INPUT, input)
 
-        startService(serviceIntent)
+        startService(beatIntent)
         buttonToggle.text = getString(R.string.pause)
     }
 
     private fun pauseService() {
-        val serviceIntent = Intent(this, MetronomeService::class.java)
-        stopService(serviceIntent)
+        val beatIntent = Intent(this, MetronomeService::class.java)
+        stopService(beatIntent)
         buttonToggle.text = getString(R.string.start)
     }
 }
