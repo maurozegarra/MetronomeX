@@ -17,19 +17,19 @@
         android:hint="@string/input"
         android:importantForAutofill="no"
         android:inputType="textCapSentences"
-        app:layout_constraintBottom_toTopOf="@+id/button_star"
+        app:layout_constraintBottom_toTopOf="@+id/button_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/button_star"
+        android:id="@+id/button_toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="startService"
+        android:onClick="toggleService"
         android:text="@string/start"
         app:layout_constraintBottom_toTopOf="@+id/button_pause"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,10 +42,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="pauseService"
         android:text="@string/pause"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_star" />
+        app:layout_constraintTop_toBottomOf="@+id/button_toggle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
