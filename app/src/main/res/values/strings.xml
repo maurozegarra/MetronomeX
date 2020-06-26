@@ -5,4 +5,5 @@
     <string name="pause">Pause</string>
     <string name="notification_title">BeatX</string>
     <string name="label">Beat</string>
+    <string name="display_msg">onClick!</string>
 </resources>

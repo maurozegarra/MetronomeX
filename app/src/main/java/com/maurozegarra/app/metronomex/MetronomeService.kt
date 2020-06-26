@@ -7,6 +7,7 @@ import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Handler
 import android.os.IBinder
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.maurozegarra.app.metronomex.MainActivity.Companion.KEY_INPUT
 
@@ -60,6 +61,7 @@ class MetronomeService : Service() {
         }
 
         handler.postDelayed(runnable, interval)
+        //Toast.makeText(applicationContext, "Beating", Toast.LENGTH_LONG).show();
 
         // stopSelf();
         return START_NOT_STICKY
