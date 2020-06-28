@@ -16,7 +16,7 @@ import android.service.quicksettings.TileService.requestListeningState
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-//import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class MetronomeService : Service() {
 
@@ -41,10 +41,10 @@ class MetronomeService : Service() {
         isBeating = true
 
         /* Start Broadcast */
-//        val myIntent = Intent(ACTION_IS_BEATING)
-//        myIntent.putExtra(KEY_IS_BEATING, isBeating)
-//        Log.d(TAG, "onStartCommand: Called: isBeating = $isBeating")
-//        LocalBroadcastManager.getInstance(this).sendBroadcast(myIntent)
+        val myIntent = Intent(ACTION_IS_BEATING)
+        myIntent.putExtra(KEY_IS_BEATING, isBeating)
+        //Log.d(TAG, "onStartCommand: Called: isBeating = $isBeating")
+        LocalBroadcastManager.getInstance(this).sendBroadcast(myIntent)
 
         val prefs = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
         val editor = prefs.edit()
@@ -108,10 +108,10 @@ class MetronomeService : Service() {
         handler.removeCallbacks(runnable)
 
         /* Start Broadcast */
-//        val myIntent = Intent(ACTION_IS_BEATING)
-//        myIntent.putExtra(KEY_IS_BEATING, isBeating)
-//        Log.d(TAG, "onDestroy: Called: isBeating = $isBeating")
-//        LocalBroadcastManager.getInstance(this).sendBroadcast(myIntent)
+        val myIntent = Intent(ACTION_IS_BEATING)
+        myIntent.putExtra(KEY_IS_BEATING, isBeating)
+        Log.d(TAG, "onDestroy: Called: isBeating = $isBeating")
+        LocalBroadcastManager.getInstance(this).sendBroadcast(myIntent)
 
         super.onDestroy()
     }

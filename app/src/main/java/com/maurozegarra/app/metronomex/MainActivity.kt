@@ -11,7 +11,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-//import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.maurozegarra.app.metronomex.MetronomeService.Companion.ACTION_IS_BEATING
 import com.maurozegarra.app.metronomex.MetronomeService.Companion.KEY_IS_BEATING
 import com.maurozegarra.app.metronomex.MetronomeService.Companion.SHARED_PREFERENCES
@@ -28,20 +28,20 @@ class MainActivity : AppCompatActivity() {
     private var fromActivity = false
 
     /* Receiver */
-//    private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
-//        override fun onReceive(context: Context?, intent: Intent?) {
-//            if (intent != null) {
-//                isBeating = intent.getBooleanExtra(KEY_IS_BEATING, false)
-//
-//                val prefs = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
-//                val editor = prefs.edit()
-//                editor.putBoolean(KEY_IS_BEATING, isBeating)
-//                editor.apply()
-//
-//                updateButton()
-//            }
-//        }
-//    }
+    private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent != null) {
+                isBeating = intent.getBooleanExtra(KEY_IS_BEATING, false)
+
+                val prefs = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+                val editor = prefs.edit()
+                editor.putBoolean(KEY_IS_BEATING, isBeating)
+                editor.apply()
+
+                updateButton()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +52,8 @@ class MainActivity : AppCompatActivity() {
         //Log.d(TAG, "onCreate: Called")
 
         /* Register Receiver */
-//        val localBroadcastManager = LocalBroadcastManager.getInstance(this)
-//        localBroadcastManager.registerReceiver(receiver, IntentFilter(ACTION_IS_BEATING))
+        val localBroadcastManager = LocalBroadcastManager.getInstance(this)
+        localBroadcastManager.registerReceiver(receiver, IntentFilter(ACTION_IS_BEATING))
 
         updateButton()
     }
@@ -99,8 +99,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         /* Unregister Receiver */
-//        val localBroadcastManager = LocalBroadcastManager.getInstance(this)
-//        localBroadcastManager.unregisterReceiver(receiver)
+        val localBroadcastManager = LocalBroadcastManager.getInstance(this)
+        localBroadcastManager.unregisterReceiver(receiver)
 
         super.onDestroy()
     }
