@@ -1,13 +1,11 @@
 package com.maurozegarra.app.metronomex
 
 import android.content.BroadcastReceiver
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -49,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         editTextInput = findViewById(R.id.edit_text_input)
         buttonToggle = findViewById(R.id.button_toggle)
-        //Log.d(TAG, "onCreate: Called")
 
         /* Register Receiver */
         val localBroadcastManager = LocalBroadcastManager.getInstance(this)
@@ -61,7 +58,6 @@ class MainActivity : AppCompatActivity() {
     private fun updateButton() {
         val prefs = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
         isBeating = prefs.getBoolean(KEY_IS_BEATING, false)
-        Log.d(TAG, "updateButton: Called: isBeating: $isBeating")
         buttonToggle.text = if (isBeating) "Pause" else "Start"
     }
 
@@ -70,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         isBeating = !isBeating
         fromActivity = true
 
-        //Log.d(TAG, "toggleButton: Called: eventPlay: $isBeating")
         val prefs = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
         val editor = prefs.edit()
         editor.putBoolean(KEY_IS_BEATING, isBeating)

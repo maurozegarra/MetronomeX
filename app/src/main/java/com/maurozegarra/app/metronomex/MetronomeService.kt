@@ -7,16 +7,17 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.service.quicksettings.TileService.requestListeningState
-
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+
 
 class MetronomeService : Service() {
 
@@ -24,6 +25,7 @@ class MetronomeService : Service() {
         const val KEY_IS_BEATING = "key_is_beating"
         const val SHARED_PREFERENCES = "shared_preferences"
         const val ACTION_IS_BEATING = "com.maurozegarra.app.IS_BEATING"
+        const val PREF_VOLUME = 6
 
         // This is the number of milliseconds in a minute
         const val ONE_MINUTE = 60_000L
@@ -43,7 +45,6 @@ class MetronomeService : Service() {
         /* Start Broadcast */
         val myIntent = Intent(ACTION_IS_BEATING)
         myIntent.putExtra(KEY_IS_BEATING, isBeating)
-        //Log.d(TAG, "onStartCommand: Called: isBeating = $isBeating")
         LocalBroadcastManager.getInstance(this).sendBroadcast(myIntent)
 
         val prefs = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
@@ -52,7 +53,6 @@ class MetronomeService : Service() {
         editor.apply()
 
         requestListeningState(this, ComponentName(this, BeatTile::class.java))
-        Log.d(TAG, "Called: onStartCommand:requestListeningState: isBeating = $isBeating")
 
         val notificationIntent = Intent(this, MainActivity::class.java)
 
@@ -67,7 +67,18 @@ class MetronomeService : Service() {
 
         startForeground(1, notification)
 
-        /* do heavy work on a background thread */
+        /* begin: Adjust system volume to 6 % */
+        val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        //Log.e(TAG, "Called: onStartCommand:isVolumeFixed ${am.isVolumeFixed}")
+
+        am.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            PREF_VOLUME,//am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+            0
+        )
+        /* end:   Adjust system volume to 6 % */
+
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_MEDIA)
             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -110,7 +121,6 @@ class MetronomeService : Service() {
         /* Start Broadcast */
         val myIntent = Intent(ACTION_IS_BEATING)
         myIntent.putExtra(KEY_IS_BEATING, isBeating)
-        Log.d(TAG, "onDestroy: Called: isBeating = $isBeating")
         LocalBroadcastManager.getInstance(this).sendBroadcast(myIntent)
 
         super.onDestroy()
