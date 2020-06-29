@@ -3,6 +3,7 @@ package com.maurozegarra.app.metronomex
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.graphics.Color
 import android.os.Build
 
 class App : Application() {
@@ -18,15 +19,19 @@ class App : Application() {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val serviceChannel = NotificationChannel(
-                CHANNEL_ID,
-                "Metronome X Channel",
-                NotificationManager.IMPORTANCE_DEFAULT
+            val notificationChannel = NotificationChannel(
+                getString(R.string.beats_notification_channel_id),
+                getString(R.string.beats_notification_channel_name),
+                NotificationManager.IMPORTANCE_LOW
             )
-            val manager = getSystemService(
+
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.WHITE
+
+            val notificationManager = getSystemService(
                 NotificationManager::class.java
             )
-            manager.createNotificationChannel(serviceChannel)
+            notificationManager.createNotificationChannel(notificationChannel)
         }
     }
 }

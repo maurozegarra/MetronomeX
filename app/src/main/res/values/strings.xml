@@ -6,4 +6,6 @@
     <string name="notification_title">Beat-X</string>
     <string name="label">Beat</string>
     <string name="display_msg">onClick!</string>
+    <string name="beats_notification_channel_id" translatable="false">beats_channel</string>
+    <string name="beats_notification_channel_name" translatable="true">Steps</string>,
 </resources>

@@ -55,13 +55,13 @@ class MetronomeService : Service() {
         requestListeningState(this, ComponentName(this, BeatTile::class.java))
 
         val notificationIntent = Intent(this, MainActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
 
-        val pendingIntent = PendingIntent.getService(this, 0, notificationIntent, 0)
         val notification =
-            NotificationCompat.Builder(this, App.CHANNEL_ID)
+            NotificationCompat.Builder(this, getString(R.string.beats_notification_channel_id))
+                .setSmallIcon(R.drawable.ic_metronome)
                 .setContentTitle(getString(R.string.notification_title))
                 .setContentText("Beating") // do the actual work
-                .setSmallIcon(R.drawable.ic_metronome)
                 .setContentIntent(pendingIntent)
                 .build()
 
