@@ -6,7 +6,7 @@ import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import androidx.annotation.RequiresApi
-import com.maurozegarra.app.metronomex.MetronomeService.Companion.KEY_IS_BEATING
+import com.maurozegarra.app.metronomex.BeatService.Companion.KEY_IS_BEATING
 
 @RequiresApi(Build.VERSION_CODES.N)
 class BeatTile : TileService() {
@@ -23,7 +23,7 @@ class BeatTile : TileService() {
     override fun onStartListening() {
         super.onStartListening()
 
-        val prefs = getSharedPreferences(MetronomeService.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences(BeatService.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         isBeating = prefs.getBoolean(KEY_IS_BEATING, false)
 
         if (isBeating) {
@@ -64,12 +64,12 @@ class BeatTile : TileService() {
     }
 
     private fun startBeat() {
-        val beatIntent = Intent(this, MetronomeService::class.java)
+        val beatIntent = Intent(this, BeatService::class.java)
         startService(beatIntent)
     }
 
     private fun stopBeat() {
-        val beatIntent = Intent(this, MetronomeService::class.java)
+        val beatIntent = Intent(this, BeatService::class.java)
         stopService(beatIntent)
     }
 }

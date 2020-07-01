@@ -19,11 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
             </intent-filter>
         </activity>
 
-        <service android:name=".MetronomeService" />
+        <service android:name=".BeatService" />
 
         <service
             android:name=".BeatTile"
@@ -37,6 +37,8 @@
                 android:name="android.service.quicksettings.ACTIVE_TILE"
                 android:value="true" />
         </service>
+
+        <receiver android:name=".receiver.StopReceiver" />
 
     </application>
 

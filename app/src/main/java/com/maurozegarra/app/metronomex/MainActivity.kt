@@ -4,15 +4,15 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.maurozegarra.app.metronomex.MetronomeService.Companion.ACTION_IS_BEATING
-import com.maurozegarra.app.metronomex.MetronomeService.Companion.KEY_IS_BEATING
-import com.maurozegarra.app.metronomex.MetronomeService.Companion.SHARED_PREFERENCES
+import com.maurozegarra.app.metronomex.BeatService.Companion.ACTION_IS_BEATING
+import com.maurozegarra.app.metronomex.BeatService.Companion.KEY_IS_BEATING
+import com.maurozegarra.app.metronomex.BeatService.Companion.SHARED_PREFERENCES
 
 class MainActivity : AppCompatActivity() {
 
@@ -79,14 +79,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startBeatService() {
-        val beatIntent = Intent(this, MetronomeService::class.java)
+        val beatIntent = Intent(this, BeatService::class.java)
         startService(beatIntent)
 
         updateButton()
     }
 
     private fun pauseBeatService() {
-        val beatIntent = Intent(this, MetronomeService::class.java)
+        val beatIntent = Intent(this, BeatService::class.java)
         stopService(beatIntent)
 
         updateButton()
